@@ -34,7 +34,7 @@ export default function Banner() {
               </p>
               <div>
                 <button className="bg-[#093056] text-white font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform duration-300">
-                  Find Your Dream Job
+                  Incident Report
                 </button>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import AmazingFeatures from "@/components/AmazingFeatures";
+import AppDownloadSection from "@/components/AppDownloadSection";
 import Banner from "@/components/Banner";
 import ContactSection from "@/components/ContactSection";
 import ProcessFlow from "@/components/ProcessFlow";
@@ -14,6 +15,7 @@ const homepage = () => {
       <AmazingFeatures />
       <ServiceCards />
       <ContactSection />
+      <AppDownloadSection />
     </div>
   );
 };

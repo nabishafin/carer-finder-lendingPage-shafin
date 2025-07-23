@@ -29,7 +29,7 @@ export default function ProcessFlow() {
   ];
 
   return (
-    <div className="w-full md:w-9/12 mx-auto px-4 md:px-0 mt-20 ">
+    <div className="w-full md:w-9/12 mx-auto px-4 md:px-0 mt-20">
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-[#0C4479] mb-8 lg:mb-5">
         How It Works
       </h2>
