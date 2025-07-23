@@ -1,121 +1,146 @@
 "use client";
 
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
-const services = [
+import processImg1 from "../../public/imgone.jpg"; // local image
+import processImg2 from "../../public/imgtwo.jpg"; // local image
+import processImg3 from "../../public/imagethree.jpg"; // local image
+
+const jobCategories = [
   {
     id: 1,
     title: "Domestic Cleaner",
-    image: "/placeholder.svg?height=300&width=400",
+    image: processImg1,
   },
   {
     id: 2,
     title: "Carer",
-    image: "/placeholder.svg?height=300&width=400",
+    image: processImg2,
   },
   {
     id: 3,
     title: "Nurse",
-    image: "/placeholder.svg?height=300&width=400",
+    image: processImg3,
   },
 ];
 
-export default function ServiceCards() {
-  const [activeCard, setActiveCard] = useState(2); // Default to middle card (Carer)
+export default function JobSlider() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Function to reorder cards so active card is in the middle
-  const getOrderedCards = () => {
-    const activeIndex = services.findIndex(
-      (service) => service.id === activeCard
+  const nextSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide((prev) => (prev + 1) % jobCategories.length);
+  };
+
+  const prevSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide(
+      (prev) => (prev - 1 + jobCategories.length) % jobCategories.length
     );
-    const orderedCards = [...services];
-
-    // Move active card to middle position (index 1)
-    if (activeIndex !== 1) {
-      const activeService = orderedCards.splice(activeIndex, 1)[0];
-      orderedCards.splice(1, 0, activeService);
-    }
-
-    return orderedCards;
   };
 
-  const handleDotClick = (serviceId) => {
-    setActiveCard(serviceId);
+  const goToSlide = (index) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide(index);
   };
 
-  const handleCardClick = (serviceId) => {
-    setActiveCard(serviceId);
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => setIsTransitioning(false), 300);
+    return () => clearTimeout(timer);
+  }, [currentSlide]);
 
-  const orderedCards = getOrderedCards();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const getPrevIndex = () =>
+    (currentSlide - 1 + jobCategories.length) % jobCategories.length;
+  const getNextIndex = () => (currentSlide + 1) % jobCategories.length;
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-8">
-      <div className="flex items-center justify-center gap-4 mb-8 min-h-[280px]">
-        {orderedCards.map((service, index) => {
-          const isActive = service.id === activeCard;
-          const isMiddle = index === 1;
+    <div className="w-full px-4 md:px-0 my-20 relative">
+      {/* Cards Container */}
+      <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+        {/* Left Card */}
+        <div
+          className="relative w-full max-w-xs h-64 md:w-80 rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 transform scale-95 opacity-80 hover:opacity-95"
+          onClick={() => goToSlide(getPrevIndex())}
+        >
+          <Image
+            src={jobCategories[getPrevIndex()].image}
+            alt={jobCategories[getPrevIndex()].title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 320px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#00e5ff]/5 via-[#00e5ff]/10 to-[#09bbcc]/80"></div>
+          <div className="absolute bottom-5 left-5 right-5">
+            <h3 className="text-white text-lg md:text-xl font-semibold text-center drop-shadow-lg">
+              {jobCategories[getPrevIndex()].title}
+            </h3>
+          </div>
+        </div>
 
-          return (
-            <Card
-              key={service.id}
-              className={cn(
-                "cursor-pointer transition-all duration-700 ease-in-out overflow-hidden transform-gpu",
-                "hover:shadow-lg",
-                isActive && isMiddle
-                  ? "w-80 h-64 scale-110 z-20 shadow-2xl ring-2 ring-cyan-400 ring-opacity-50"
-                  : "w-64 h-48 scale-95 opacity-75 hover:opacity-90 hover:scale-100"
-              )}
-              onClick={() => handleCardClick(service.id)}
-              style={{
-                transform:
-                  isActive && isMiddle
-                    ? "translateY(-10px) scale(1.1)"
-                    : undefined,
-              }}
-            >
-              <CardContent className="p-0 relative h-full">
-                <div
-                  className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-end justify-start p-6 relative"
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(6, 182, 212, 0.8), rgba(37, 99, 235, 0.8)), url(${service.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  <h3
-                    className={cn(
-                      "text-white font-semibold transition-all duration-300",
-                      isActive && isMiddle ? "text-2xl" : "text-xl"
-                    )}
-                  >
-                    {service.title}
-                  </h3>
-                  {isActive && isMiddle && (
-                    <div className="absolute top-4 right-4 w-3 h-3 bg-white rounded-full animate-pulse" />
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
+        {/* Center Card */}
+        <div className="relative w-full max-w-md h-72 md:w-[440px] md:h-80 rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 transform scale-105 shadow-2xl z-10">
+          <Image
+            src={jobCategories[currentSlide].image}
+            alt={jobCategories[currentSlide].title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 440px"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#00e5ff]/5 via-[#00e5ff]/10 to-[#09bbcc]/80"></div>
+          <div className="absolute bottom-6 left-6 right-6">
+            <h3 className="text-white text-xl md:text-2xl font-semibold text-center drop-shadow-lg">
+              {jobCategories[currentSlide].title}
+            </h3>
+          </div>
+        </div>
+
+        {/* Right Card */}
+        <div
+          className="relative w-full max-w-xs h-64 md:w-80 rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 transform scale-95 opacity-80 hover:opacity-95"
+          onClick={() => goToSlide(getNextIndex())}
+        >
+          <Image
+            src={jobCategories[getNextIndex()].image}
+            alt={jobCategories[getNextIndex()].title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 320px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#00e5ff]/5 via-[#00e5ff]/10 to-[#09bbcc]/80"></div>
+          <div className="absolute bottom-5 left-5 right-5">
+            <h3 className="text-white text-lg md:text-xl font-semibold text-center drop-shadow-lg">
+              {jobCategories[getNextIndex()].title}
+            </h3>
+          </div>
+        </div>
       </div>
 
-      {/* Indicator dots - maintain original order */}
-      <div className="flex justify-center gap-3">
-        {services.map((service) => (
+      {/* Dot Indicators */}
+      <div className="flex justify-center space-x-3 mt-8">
+        {jobCategories.map((_, index) => (
           <button
-            key={service.id}
-            className={cn(
-              "transition-all duration-500 rounded-full border-2 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50",
-              activeCard === service.id
-                ? "w-4 h-4 bg-cyan-500 border-cyan-500 scale-125 shadow-lg"
-                : "w-3 h-3 bg-gray-300 border-gray-300 hover:bg-cyan-300 hover:border-cyan-300"
-            )}
-            onClick={() => handleDotClick(service.id)}
-            aria-label={`Select ${service.title}`}
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-200 ${
+              index === currentSlide
+                ? "bg-[#27C8DD] scale-125"
+                : "bg-gray-300 hover:bg-gray-400"
+            }`}
+            disabled={isTransitioning}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
