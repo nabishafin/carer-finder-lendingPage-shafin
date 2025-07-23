@@ -10,20 +10,20 @@ import phoneImage from "../../public/downloadimg.png";
 
 const AppDownloadSection = () => {
   return (
-    <section className="py-16 px-4 bg-white">
-      <div className="w-full md:w-9/12 mx-auto px-4 md:px-0 mt-20">
+    <section className="py-12 px-4 bg-white">
+      <div className="max-w-6xl mx-auto mt-10">
         {/* Section Title */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0C4479] mb-4">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-4xl font-bold text-[#0C4479]">
             Download Now
           </h2>
         </div>
 
         {/* Main Content */}
-        <div className="flex flex-col lg:flex-row items-center gap-12">
+        <div className="flex flex-col lg:flex-row items-center gap-10">
           {/* Left Side - Phone Image */}
-          <div className="flex-1 flex justify-center">
-            <div className="w-[600px] h-[600px] relative">
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[500px] md:h-[500px]">
               <Image
                 src={phoneImage}
                 alt="Phone Mockup"
@@ -34,34 +34,27 @@ const AppDownloadSection = () => {
           </div>
 
           {/* Right Side - Content */}
-          <div className="flex-1 space-y-6">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                Download the App and Find Your Perfect Job Today
-              </h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Available on iOS and Android. Start your journey towards a
-                fulfilling career in just a few taps!
-              </p>
-            </div>
+          <div className="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
+            <h3 className="text-xl md:text-3xl font-bold text-gray-900">
+              Download the App and Find Your Perfect Job Today
+            </h3>
+            <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+              Available on iOS and Android. Start your journey towards a
+              fulfilling career in just a few taps!
+            </p>
 
             {/* App Store Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="cursor-pointer hover:opacity-80 transition-opacity">
-                <Image
-                  src={googleplay}
-                  alt="Get it on Google Play"
-                  className="w-40 h-auto"
-                />
-              </div>
-
-              <div className="cursor-pointer hover:opacity-80 transition-opacity">
-                <Image
-                  src={appleplay}
-                  alt="Download on the App Store"
-                  className="w-40 h-auto"
-                />
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+              <Image
+                src={googleplay}
+                alt="Get it on Google Play"
+                className="w-40 h-auto cursor-pointer hover:opacity-80 transition-opacity"
+              />
+              <Image
+                src={appleplay}
+                alt="Download on the App Store"
+                className="w-40 h-auto cursor-pointer hover:opacity-80 transition-opacity"
+              />
             </div>
           </div>
         </div>
