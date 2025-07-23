@@ -29,7 +29,7 @@ export default function ProcessFlow() {
   ];
 
   return (
-    <div className="w-full md:w-9/12 mx-auto px-4 md:px-0 mt-20">
+    <div className="w-full md:w-9/12 mx-auto px-4 md:px-0 mt-20 ">
       <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-[#0C4479] mb-8 lg:mb-5">
         How It Works
       </h2>
@@ -37,11 +37,11 @@ export default function ProcessFlow() {
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Left side - Image */}
         <div className="order-2 lg:order-1 flex justify-center">
-          <div className="w-full max-w-[400px] sm:max-w-[500px] lg:max-w-[650px] ">
+          <div className="w-full max-w-[400px] sm:max-w-[500px] lg:max-w-[600px] ">
             <Image
               src={processImg}
               alt="Mobile app interface"
-              width={650}
+              width={600}
               height={450}
               className="w-full h-auto"
             />

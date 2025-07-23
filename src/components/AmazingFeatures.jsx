@@ -41,7 +41,7 @@ export default function AmazingFeatures() {
         </h2>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 gap-8 ">
+        <div className="grid md:grid-cols-2 gap-8 ml-0 md:ml-20 ">
           {features.map((feature, index) => (
             <div
               key={index}

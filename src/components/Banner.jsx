@@ -23,7 +23,7 @@ export default function Banner() {
         <div className="w-full md:w-9/12 mx-auto px-4 md:px-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             {/* Text Content */}
-            <div className="text-center lg:text-left space-y-4 sm:space-y-6">
+            <div className="text-center lg:text-left space-y-4 sm:space-y-6 z-30">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
                 Your Next Career Opportunity, One Click Away!
               </h1>
