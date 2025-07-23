@@ -2,6 +2,7 @@
 import Image from "next/image";
 import bannerImage from "../../public/banner.jpg";
 import imageUrl from "../../public/bannerimg.png";
+import Link from "next/link";
 
 export default function Banner() {
   return (
@@ -33,9 +34,11 @@ export default function Banner() {
                 opportunities.
               </p>
               <div>
-                <button className="bg-[#093056] text-white font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform duration-300">
-                  Incident Report
-                </button>
+                <Link href="/report">
+                  <button className="bg-[#093056] text-white font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform duration-300">
+                    Incident Report
+                  </button>
+                </Link>
               </div>
             </div>
 
