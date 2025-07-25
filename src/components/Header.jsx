@@ -1,17 +1,21 @@
 import React from "react";
-import logo from "../../public/logo.svg";
+import Link from "next/link";
 import Image from "next/image";
+import logo from "../../public/logo.svg";
 
 const Header = () => {
   return (
-    <div className="bg-[#0C4479] p-2 flex items-center justify-center top-0 sticky z-50">
-      <Image
-        src={logo} // The logo file you imported
-        alt="Logo" // Descriptive text for the image
-        width={220} // Set the width you prefer
-        height={220} // Set the height you prefer
-      />
-    </div>
+    <header className="bg-[#0C4479] p-2 flex items-center justify-center sticky top-0 z-50">
+      <Link href="/" passHref>
+        <Image
+          src={logo}
+          alt="Logo"
+          width={220}
+          height={220}
+          className="cursor-pointer"
+        />
+      </Link>
+    </header>
   );
 };
 

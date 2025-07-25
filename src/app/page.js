@@ -1,23 +1,24 @@
-import AmazingFeatures from "@/components/AmazingFeatures";
-import AppDownloadSection from "@/components/AppDownloadSection";
-import Banner from "@/components/Banner";
-import ContactSection from "@/components/ContactSection";
-import ProcessFlow from "@/components/ProcessFlow";
-import ServiceCards from "@/components/ServiceCards";
-
 import React from "react";
 
-const homepage = () => {
+// Component Imports
+import Banner from "@/components/Banner";
+import ProcessFlow from "@/components/ProcessFlow";
+import AmazingFeatures from "@/components/AmazingFeatures";
+import ServiceCards from "@/components/ServiceCards";
+import ContactSection from "@/components/ContactSection";
+import AppDownloadSection from "@/components/AppDownloadSection";
+
+const Homepage = () => {
   return (
-    <div>
+    <main className="space-y-24">
       <Banner />
       <ProcessFlow />
       <AmazingFeatures />
       <ServiceCards />
       <ContactSection />
       <AppDownloadSection />
-    </div>
+    </main>
   );
 };
 
-export default homepage;
+export default Homepage;
